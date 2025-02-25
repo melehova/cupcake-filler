@@ -2,6 +2,8 @@ chrome.storage.local.get("formData", (result) => {
   if (!result.formData) return alert("No data found");
 
   const data = JSON.parse(result.formData);
+  const form = document.querySelector('form');
+  if (!form) return alert("No form found");
 
   function fillField(name, value) {
       const input = document.querySelector(`input[name="${name}"]`);
@@ -41,4 +43,6 @@ chrome.storage.local.get("formData", (result) => {
   for (const key in data) {
       fillField(key, data[key]);
   }
+
+  form.submit();
 });
